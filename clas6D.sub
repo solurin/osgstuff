@@ -1,0 +1,23 @@
+                                                                                           
+
+executable              = RunScriptD.sh
+
+Requirements = HAS_SINGULARITY == TRUE
++SingularityImage = "/cvmfs/singularity.opensciencegrid.org/huckb/clas6sim:latest"
+
+
+transfer_input_files    = clas6_sim.sh, ffread_eg2.gsim, ffread_eg2D.gsim, lepto.txt
+#### transfer_output_files   = gsim.bos, leptoD.A00
+transfer_output_remaps  = "recsisD.log = recsisD.$(Cluster).$(Process).log ; recsisd.hbook = recsisD.$(Cluster).$(Process).hbook ; recsisD.A00 = recsisD.$(Cluster).$(Process).A00 ; leptoD.A00 = leptoD.$(Cluster).$(Process).A00"
+
+
+
+log                     = test.$(Cluster).$(Process).log
+output                  = test.$(Cluster).$(Process).output
+error                   = test.$(Cluster).$(Process).error
+stream_output           = True
+
+
+should_transfer_files   = Yes
+when_to_transfer_output = ON_EXIT
+queue 1
