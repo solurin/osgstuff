@@ -1,0 +1,22 @@
+executable              = RunScriptPb.sh
+
+Requirements = HAS_SINGULARITY == TRUE
++SingularityImage = "/cvmfs/singularity.opensciencegrid.org/huckb/clas6sim:latest"
+
+
+transfer_input_files    = clas6_sim.sh, ffread_eg2.gsim, ffread_eg2D.gsim, lepto.txt 
+#### transfer_output_files   = gsim.bos, leptoD.A00
+transfer_output_remaps	= "recsisPb.log = recsisPb.$(Cluster).$(Process).log ; recsisPb.hbook = recsisPb.$(Cluster).$(Process).hbook ; recsisPb.A00 = recsisPb.$(Cluster).$(Process).A00"
+#### add recsisD.log and recsisD.hbook
+
+
+
+log                     = test.$(Cluster).$(Process).log
+output                  = test.$(Cluster).$(Process).output
+error                   = test.$(Cluster).$(Process).error
+stream_output		= True
+
+
+should_transfer_files   = Yes
+when_to_transfer_output = ON_EXIT
+queue 1
